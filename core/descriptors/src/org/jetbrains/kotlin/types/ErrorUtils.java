@@ -422,7 +422,7 @@ public class ErrorUtils {
                 Name.special("<ERROR PROPERTY>"),
                 CallableMemberDescriptor.Kind.DECLARATION,
                 SourceElement.NO_SOURCE,
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
         );
         descriptor.setType(ERROR_PROPERTY_TYPE, Collections.<TypeParameterDescriptor>emptyList(), null, null);
 

@@ -26,6 +26,7 @@ interface IrVariable : IrValueDeclaration, IrSymbolDeclaration<IrVariableSymbol>
     val isVar: Boolean
     val isConst: Boolean
     val isLateinit: Boolean
+    val isClassDelegate: Boolean
 
     var initializer: IrExpression?
 }

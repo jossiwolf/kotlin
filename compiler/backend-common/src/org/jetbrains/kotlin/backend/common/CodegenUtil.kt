@@ -31,6 +31,7 @@ object CodegenUtil {
             expression: KtExpression, classDescriptor: ClassDescriptor, bindingContext: BindingContext
     ): PropertyDescriptor? {
         val call = (expression as? KtSimpleNameExpression)?.getResolvedCall(bindingContext) ?: return null
+        if ((call.resultingDescriptor as? PropertyDescriptor)?.isClassDelegate == true) return call.resultingDescriptor as PropertyDescriptor
         val callResultingDescriptor = call.resultingDescriptor as? ValueParameterDescriptor ?: return null
         // constructor parameter
         if (callResultingDescriptor.containingDeclaration is ConstructorDescriptor) {

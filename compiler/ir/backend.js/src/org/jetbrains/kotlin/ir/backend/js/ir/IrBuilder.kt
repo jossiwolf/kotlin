@@ -195,6 +195,7 @@ object JsIrBuilder {
         isVar: Boolean = false,
         isConst: Boolean = false,
         isLateinit: Boolean = false,
+        isClassDelegate: Boolean = false,
         initializer: IrExpression? = null
     ): IrVariable {
         val descriptor = WrappedVariableDescriptor()
@@ -207,7 +208,8 @@ object JsIrBuilder {
             type,
             isVar,
             isConst,
-            isLateinit
+            isLateinit,
+            isClassDelegate
         ).also {
             descriptor.bind(it)
             it.initializer = initializer

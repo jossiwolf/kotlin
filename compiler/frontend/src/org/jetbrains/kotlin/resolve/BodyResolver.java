@@ -302,7 +302,9 @@ public class BodyResolver {
                 }
                 KtExpression delegateExpression = specifier.getDelegateExpression();
                 if (delegateExpression != null) {
-                    LexicalScope scope = scopeForConstructor == null ? scopeForMemberResolution : scopeForConstructor;
+                    LexicalScope oldScope = scopeForConstructor == null ? scopeForMemberResolution : scopeForConstructor;
+                    LexicalScope scope = scopeForMemberResolution;
+                    LexicalScope classDelegatesScope = new LexicalScopeImpl(scopeForMemberResolution, descriptor, false, null, LexicalScopeKind.CLASS_MEMBER_DELEGATES_SCOPE);
                     KotlinType expectedType = supertype != null ? supertype : NO_EXPECTED_TYPE;
                     typeInferrer.getType(
                             scope, delegateExpression, expectedType, outerDataFlowInfo, InferenceSession.Companion.getDefault(), trace

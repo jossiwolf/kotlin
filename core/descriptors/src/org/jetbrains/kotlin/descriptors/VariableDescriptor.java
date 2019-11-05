@@ -38,4 +38,6 @@ public interface VariableDescriptor extends ValueDescriptor {
     boolean isConst();
 
     boolean isLateInit();
+
+    boolean isClassDelegate();
 }

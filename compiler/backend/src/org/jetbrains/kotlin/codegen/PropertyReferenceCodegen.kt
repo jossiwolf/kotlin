@@ -172,6 +172,7 @@ class PropertyReferenceCodegen(
             OperatorNameConventions.SET,
             NoLookupLocation.FROM_BACKEND
         ).single()
+        println(setFunction)
         val setImpl = createFakeOpenDescriptor(setFunction, classDescriptor)
         functionCodegen.generateMethod(
             JvmDeclarationOrigin.NO_ORIGIN,

@@ -64,7 +64,8 @@ abstract class IrDelegateDescriptorBase(
         /* isExpect = */ false,
         /* isActual = */ false,
         /* isExternal = */ false,
-        /* isDelegated = */ true
+        /* isDelegated = */ true,
+        /* isClassDelegate = */ false
     ) {
     init {
         setType(delegateType, emptyList(), (containingDeclaration as? ClassDescriptor)?.thisAsReceiverParameter, null)
@@ -139,6 +140,8 @@ class IrLocalDelegatedPropertyDelegateDescriptorImpl(
     override fun getCompileTimeInitializer(): ConstantValue<*>? = null
     override fun isVar(): Boolean = false
     override fun isLateInit(): Boolean = false
+    override fun isClassDelegate(): Boolean = false
+
     override fun substitute(substitutor: TypeSubstitutor): VariableDescriptor? = throw UnsupportedOperationException()
     override fun getVisibility(): Visibility = Visibilities.LOCAL
 

@@ -134,6 +134,7 @@ class DeserializedPropertyDescriptor(
     isConst: Boolean,
     isExternal: Boolean,
     isDelegated: Boolean,
+    isClassDelegate: Boolean,
     isExpect: Boolean,
     override val proto: ProtoBuf.Property,
     override val nameResolver: NameResolver,
@@ -142,7 +143,7 @@ class DeserializedPropertyDescriptor(
     override val containerSource: DeserializedContainerSource?
 ) : DeserializedCallableMemberDescriptor, PropertyDescriptorImpl(
     containingDeclaration, original, annotations, modality, visibility, isVar, name, kind, SourceElement.NO_SOURCE,
-    isLateInit, isConst, isExpect, false, isExternal, isDelegated
+    isLateInit, isConst, isExpect, false, isExternal, isDelegated, isClassDelegate
 ) {
     override var coroutinesExperimentalCompatibilityMode = DeserializedMemberDescriptor.CoroutinesCompatibilityMode.COMPATIBLE
         private set
@@ -169,7 +170,7 @@ class DeserializedPropertyDescriptor(
     ): PropertyDescriptorImpl {
         return DeserializedPropertyDescriptor(
             newOwner, original, annotations, newModality, newVisibility, isVar, newName, kind, isLateInit, isConst, isExternal,
-            @Suppress("DEPRECATION") isDelegated, isExpect, proto, nameResolver, typeTable, versionRequirementTable, containerSource
+            @Suppress("DEPRECATION") isDelegated, isExpect, isClassDelegate, proto, nameResolver, typeTable, versionRequirementTable, containerSource
         )
     }
 

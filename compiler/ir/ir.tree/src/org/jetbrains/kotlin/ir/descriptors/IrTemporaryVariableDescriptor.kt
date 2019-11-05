@@ -45,6 +45,8 @@ class IrTemporaryVariableDescriptorImpl(
 
     override fun isLateInit(): Boolean = false
 
+    override fun isClassDelegate(): Boolean = false
+
     override fun <R, D> accept(visitor: DeclarationDescriptorVisitor<R, D>, data: D): R =
         visitor.visitVariableDescriptor(this, data)
 }

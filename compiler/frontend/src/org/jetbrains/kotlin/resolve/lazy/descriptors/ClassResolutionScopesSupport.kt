@@ -74,6 +74,17 @@ class ClassResolutionScopesSupport(
         )
     }
 
+    val scopeForMemberClassDelegateDeclarationResolution: () -> LexicalScope = storageManager.createLazyValue(onRecursion = createErrorLexicalScope) {
+        val scopeWithGenerics = scopeWithGenerics(inheritanceScopeWithMe())
+        LexicalScopeImpl(
+            scopeWithGenerics,
+            classDescriptor,
+            true,
+            classDescriptor.thisAsReceiverParameter,
+            LexicalScopeKind.CLASS_MEMBER_DELEGATES_SCOPE
+        )
+    }
+
     val scopeForStaticMemberDeclarationResolution: () -> LexicalScope =
         storageManager.createLazyValue(onRecursion = createErrorLexicalScope) {
             if (classDescriptor.kind.isSingleton) {

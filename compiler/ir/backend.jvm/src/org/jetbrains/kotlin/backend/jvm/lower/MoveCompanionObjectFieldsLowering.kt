@@ -170,7 +170,7 @@ private class MoveOrCopyCompanionObjectFieldsLowering(val context: CommonBackend
                         val newVariable = IrVariableImpl(
                             declaration.startOffset, declaration.endOffset,
                             declaration.origin, IrVariableSymbolImpl(newDescriptor),
-                            declaration.name, declaration.type, declaration.isVar, declaration.isConst, declaration.isLateinit
+                            declaration.name, declaration.type, declaration.isVar, declaration.isConst, declaration.isLateinit, /* Could probs be false bc in compantion object it doesn't need classdelegate */declaration.isClassDelegate
                         ).apply {
                             newDescriptor.bind(this)
                             parent = newParent

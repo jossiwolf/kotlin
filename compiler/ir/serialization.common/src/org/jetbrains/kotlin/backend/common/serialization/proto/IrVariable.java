@@ -104,6 +104,11 @@ public final class IrVariable extends
             bitField0_ |= 0x00000040;
             break;
           }
+          case 66: {
+            bitField0_ |= 0x8;
+            isClassDelegate_ = input.readBool();
+            break;
+          }
         }
       }
     } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
@@ -243,6 +248,21 @@ public final class IrVariable extends
     return initializer_;
   }
 
+  public static final int IS_CLASSDELEGATE_FIELD_NUMBER = 8;
+  private boolean isClassDelegate_;
+  /**
+   * <code>required bool is_lateinit = 8;</code>
+   */
+  public boolean hasIsClassDelegete() {
+    return ((bitField0_ & 0x8) == 0x8);
+  }
+  /**
+   * <code>required bool is_classdelegate = 8;</code>
+   */
+  public boolean getIsClassDelegate() {
+    return isClassDelegate_;
+  }
+
   private void initFields() {
     base_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance();
     name_ = 0;
@@ -251,6 +271,7 @@ public final class IrVariable extends
     isConst_ = false;
     isLateinit_ = false;
     initializer_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
+    isClassDelegate_ = false;
   }
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
@@ -320,6 +341,9 @@ public final class IrVariable extends
     if (((bitField0_ & 0x00000040) == 0x00000040)) {
       output.writeMessage(7, initializer_);
     }
+    if (((bitField0_ & 0x8) == 0x8)) {
+      output.writeBool(8, isClassDelegate_);
+    }
     output.writeRawBytes(unknownFields);
   }
 
@@ -356,6 +380,10 @@ public final class IrVariable extends
     if (((bitField0_ & 0x00000040) == 0x00000040)) {
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
         .computeMessageSize(7, initializer_);
+    }
+    if (((bitField0_ & 0x8) == 0x8)) {
+      size += org.jetbrains.kotlin.protobuf.CodedOutputStream
+              .computeBoolSize(8, isClassDelegate_);
     }
     size += unknownFields.size();
     memoizedSerializedSize = size;
@@ -465,6 +493,8 @@ public final class IrVariable extends
       bitField0_ = (bitField0_ & ~0x00000020);
       initializer_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
       bitField0_ = (bitField0_ & ~0x00000040);
+      isClassDelegate_ = false;
+      bitField0_ = (bitField0_ & ~0x8);
       return this;
     }
 
@@ -822,6 +852,38 @@ public final class IrVariable extends
       bitField0_ = (bitField0_ & ~0x00000020);
       isLateinit_ = false;
       
+      return this;
+    }
+
+    private boolean isClassDelegate_;
+    /**
+     * <code>required bool is_classdelegate = 8;</code>
+     */
+    public boolean hasIsClassDelegate() {
+      return ((bitField0_ & 0x8) == 0x8);
+    }
+    /**
+     * <code>required bool is_classdelegate = 8;</code>
+     */
+    public boolean getIsClassDelegate() {
+      return isClassDelegate_;
+    }
+    /**
+     * <code>required bool is_classdelegate = 8;</code>
+     */
+    public Builder setIsClassDelegate(boolean value) {
+      bitField0_ |= 0x8;
+      isClassDelegate_ = value;
+
+      return this;
+    }
+    /**
+     * <code>required bool is_lateinit = 6;</code>
+     */
+    public Builder clearIsClassDelegate() {
+      bitField0_ = (bitField0_ & ~0x8);
+      isClassDelegate_ = false;
+
       return this;
     }
 

@@ -88,7 +88,8 @@ class LateinitLowering(val context: CommonBackendContext) : FileLoweringPass {
                     type,
                     true,
                     false,
-                    true
+                    true,
+                    false
                 ).also {
                     descriptor.bind(it)
                     it.parent = declaration.parent

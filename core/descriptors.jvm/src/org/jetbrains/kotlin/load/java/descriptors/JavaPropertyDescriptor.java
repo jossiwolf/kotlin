@@ -51,7 +51,7 @@ public class JavaPropertyDescriptor extends PropertyDescriptorImpl implements Ja
             @Nullable Pair<UserDataKey<?>, ?> singleUserData
     ) {
         super(containingDeclaration, original, annotations, modality, visibility, isVar, name, kind, source,
-              false, false, false, false, false, false);
+              false, false, false, false, false, false, false);
 
         this.isStaticFinal = isStaticFinal;
         this.singleUserData = singleUserData;

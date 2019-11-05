@@ -36,7 +36,8 @@ class IrVariableImpl(
     override val type: IrType,
     override val isVar: Boolean,
     override val isConst: Boolean,
-    override val isLateinit: Boolean
+    override val isLateinit: Boolean,
+    override val isClassDelegate: Boolean
 ) :
     IrDeclarationBase(startOffset, endOffset, origin),
     IrVariable {
@@ -52,7 +53,8 @@ class IrVariableImpl(
         symbol.descriptor.name, type,
         isVar = symbol.descriptor.isVar,
         isConst = symbol.descriptor.isConst,
-        isLateinit = symbol.descriptor.isLateInit
+        isLateinit = symbol.descriptor.isLateInit,
+        isClassDelegate = symbol.descriptor.isClassDelegate
     )
 
     constructor(

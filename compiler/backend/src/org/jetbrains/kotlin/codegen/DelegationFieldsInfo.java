@@ -66,11 +66,14 @@ public class DelegationFieldsInfo {
     @Nullable
     public DelegationFieldsInfo.Field getInfo(KtDelegatedSuperTypeEntry specifier) {
         DelegationFieldsInfo.Field field = fields.get(specifier);
+        System.out.println("Jossi | Specifier " + specifier.getDelegateExpression().getText());
+        System.out.println("Jossi | Name: " + field.name + " | Type: " + field.type.getClassName());
         assert field != null || state.getClassBuilderMode() == ClassBuilderMode.LIGHT_CLASSES : "No field for " + specifier.getText();
         return field;
     }
 
     private void addField(KtDelegatedSuperTypeEntry specifier, PropertyDescriptor propertyDescriptor) {
+        System.out.println("Jossi addField 1");
         fields.put(specifier,
                    new DelegationFieldsInfo.Field(typeMapper.mapType(propertyDescriptor), propertyDescriptor.getName().asString(), false));
     }
@@ -90,8 +93,13 @@ public class DelegationFieldsInfo {
 
                 PropertyDescriptor propertyDescriptor = CodegenUtil.getDelegatePropertyIfAny(expression, classDescriptor, bindingContext);
 
+                boolean isPropertyClassDelegate = propertyDescriptor != null && propertyDescriptor.isClassDelegate();
+                try {
+                    System.out.println("PropertyName: " + propertyDescriptor.getName().asString());
+                    System.out.println("isClassDelegate: " + isPropertyClassDelegate);
+                } catch (NullPointerException ignored) { }
 
-                if (CodegenUtil.isFinalPropertyWithBackingField(propertyDescriptor, bindingContext)) {
+                if (CodegenUtil.isFinalPropertyWithBackingField(propertyDescriptor, bindingContext) || isPropertyClassDelegate) {
                     result.addField((KtDelegatedSuperTypeEntry) specifier, propertyDescriptor);
                 }
                 else {

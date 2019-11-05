@@ -110,7 +110,8 @@ private fun genProperty(
             /* isExpect = */ false,
             /* isActual = */ false,
             /* isExternal = */ false,
-            /* isDelegated = */ false
+            /* isDelegated = */ false,
+            /* isClassDelegate = */ false
     ) {
         override val errorType = errorType
         override val shouldBeCached = type.shouldBeCached

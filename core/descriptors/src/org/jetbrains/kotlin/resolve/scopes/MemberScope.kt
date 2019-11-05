@@ -25,7 +25,7 @@ import java.lang.reflect.Modifier
 
 interface MemberScope : ResolutionScope {
 
-    override fun getContributedVariables(name: Name, location: LookupLocation): Collection<@JvmWildcard PropertyDescriptor>
+    override fun  getContributedVariables(name: Name, location: LookupLocation): Collection<@JvmWildcard PropertyDescriptor>
 
     override fun getContributedFunctions(name: Name, location: LookupLocation): Collection<@JvmWildcard SimpleFunctionDescriptor>
 

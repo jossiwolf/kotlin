@@ -37,6 +37,7 @@ class IrLazyProperty(
     override val isExternal: Boolean,
     override val isExpect: Boolean,
     override val isFakeOverride: Boolean,
+    override val isClassDelegate: Boolean,
     stubGenerator: DeclarationStubGenerator,
     typeTranslator: TypeTranslator,
     private val bindingContext: BindingContext? = null
@@ -61,6 +62,7 @@ class IrLazyProperty(
         isLateinit = symbol.descriptor.isLateInit,
         isDelegated = @Suppress("DEPRECATION") symbol.descriptor.isDelegated,
         isExternal = symbol.descriptor.isEffectivelyExternal(),
+        isClassDelegate = symbol.descriptor.isClassDelegate,
         isExpect = symbol.descriptor.isExpect,
         isFakeOverride = origin == IrDeclarationOrigin.FAKE_OVERRIDE,
         stubGenerator = stubGenerator,

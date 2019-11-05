@@ -27,6 +27,8 @@ import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodSignature;
 import org.jetbrains.org.objectweb.asm.Type;
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -204,12 +206,6 @@ public class ConstructorCodegen {
                 iv, codegen, constructorDescriptor, getDelegationConstructorCall(bindingContext, constructorDescriptor), superClassAsmType
         );
 
-        for (KtSuperTypeListEntry specifier : myClass.getSuperTypeListEntries()) {
-            if (specifier instanceof KtDelegatedSuperTypeEntry) {
-                genCallToDelegatorByExpressionSpecifier(iv, codegen, (KtDelegatedSuperTypeEntry) specifier, fieldsInfo);
-            }
-        }
-
         int curParam = 0;
         List<ValueParameterDescriptor> parameters = constructorDescriptor.getValueParameters();
         for (KtParameter parameter : classBodyCodegen.getPrimaryConstructorParameters()) {
@@ -229,6 +225,15 @@ public class ConstructorCodegen {
         if (!isObject(descriptor)) {
             memberCodegen.generateInitializers(() -> codegen);
         }
+
+        for (KtSuperTypeListEntry specifier : myClass.getSuperTypeListEntries()) {
+            // Initialize class delegation expressions after initializing other class members
+            // This enables delegating to class members
+            if (specifier instanceof KtDelegatedSuperTypeEntry) {
+                genCallToDelegatorByExpressionSpecifier(iv, codegen, (KtDelegatedSuperTypeEntry) specifier, fieldsInfo);
+            }
+        }
+
         iv.visitInsn(RETURN);
     }
 

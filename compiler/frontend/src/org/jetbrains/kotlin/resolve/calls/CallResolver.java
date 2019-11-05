@@ -44,6 +44,7 @@ import org.jetbrains.kotlin.resolve.scopes.SyntheticScopes;
 import org.jetbrains.kotlin.resolve.scopes.receivers.ExpressionReceiver;
 import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.types.KotlinTypeKt;
+import org.jetbrains.kotlin.types.TypeSubstitution;
 import org.jetbrains.kotlin.types.expressions.ExpressionTypingContext;
 import org.jetbrains.kotlin.types.expressions.ExpressionTypingServices;
 import org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher;
@@ -457,6 +458,8 @@ public class CallResolver {
         context.trace.record(BindingContext.LEXICAL_SCOPE, call, context.scope);
 
         ClassDescriptor currentClassDescriptor = calleeConstructor.getContainingDeclaration();
+
+        System.out.println("Jossi " + call.toString());
 
         boolean isThisCall = calleeExpression.isThis();
         if (currentClassDescriptor.getKind() == ClassKind.ENUM_CLASS && !isThisCall) {

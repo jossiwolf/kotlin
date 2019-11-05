@@ -53,6 +53,7 @@ open class AccessorForPropertyDescriptor private constructor(
     false,
     false,
     false,
+    false,
     false
 ), AccessorForCallableDescriptor<PropertyDescriptor> {
 

@@ -27,6 +27,7 @@ import org.jetbrains.kotlin.types.TypeSubstitutor;
 public class LocalVariableDescriptor extends VariableDescriptorWithInitializerImpl implements VariableDescriptorWithAccessors {
     private final boolean isDelegated;
     private final boolean isLateInit;
+    private final boolean isClassDelegate;
     private LocalVariableAccessorDescriptor.Getter getter;
     private LocalVariableAccessorDescriptor.Setter setter;
 
@@ -38,11 +39,13 @@ public class LocalVariableDescriptor extends VariableDescriptorWithInitializerIm
             boolean mutable,
             boolean isDelegated,
             boolean isLateInit,
+            boolean isClassDelegate,
             @NotNull SourceElement source
     ) {
         super(containingDeclaration, annotations, name, type, mutable, source);
         this.isDelegated = isDelegated;
         this.isLateInit = isLateInit;
+        this.isClassDelegate = isClassDelegate;
     }
 
     public LocalVariableDescriptor(
@@ -52,9 +55,10 @@ public class LocalVariableDescriptor extends VariableDescriptorWithInitializerIm
             @Nullable KotlinType type,
             boolean mutable,
             boolean isDelegated,
+            boolean isClassDelegate,
             @NotNull SourceElement source
     ) {
-        this(containingDeclaration, annotations, name, type, mutable, isDelegated, false, source);
+        this(containingDeclaration, annotations, name, type, mutable, isDelegated, false, isClassDelegate, source);
     }
 
     public LocalVariableDescriptor(
@@ -119,5 +123,10 @@ public class LocalVariableDescriptor extends VariableDescriptorWithInitializerIm
     @Override
     public boolean isLateInit() {
         return isLateInit;
+    }
+
+    @Override
+    public boolean isClassDelegate() {
+        return isClassDelegate;
     }
 }

@@ -332,6 +332,8 @@ class TypeResolver(
 
                     override fun isLateInit() = false
 
+                    override fun isClassDelegate() = false
+
                     override fun getCompileTimeInitializer() = null
 
                     override fun <R : Any?, D : Any?> accept(visitor: DeclarationDescriptorVisitor<R, D>, data: D): R {
@@ -901,7 +903,7 @@ class TypeResolver(
         outerClass: ClassDescriptor
     ): List<TypeProjection>? {
         val enclosingClass = findFirstFromMeAndParent { scope ->
-            if (scope is LexicalScope && scope.kind == LexicalScopeKind.CLASS_MEMBER_SCOPE)
+            if (scope is LexicalScope && scope.kind == LexicalScopeKind.CLASS_MEMBER_SCOPE || scope is LexicalScope && scope.kind == LexicalScopeKind.CLASS_MEMBER_DELEGATES_SCOPE)
                 scope.ownerDescriptor as ClassDescriptor
             else
                 null

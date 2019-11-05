@@ -38,6 +38,7 @@ import org.jetbrains.kotlin.descriptors.annotations.CompositeAnnotations;
 import org.jetbrains.kotlin.descriptors.impl.*;
 import org.jetbrains.kotlin.diagnostics.Errors;
 import org.jetbrains.kotlin.incremental.components.NoLookupLocation;
+import org.jetbrains.kotlin.lexer.KtToken;
 import org.jetbrains.kotlin.lexer.KtTokens;
 import org.jetbrains.kotlin.name.Name;
 import org.jetbrains.kotlin.psi.*;
@@ -911,7 +912,8 @@ public class DescriptorResolver {
                 container instanceof ClassDescriptor && ((ClassDescriptor) container).isExpect(),
                 modifierList != null && PsiUtilsKt.hasActualModifier(modifierList),
                 modifierList != null && modifierList.hasModifier(KtTokens.EXTERNAL_KEYWORD),
-                propertyInfo.getHasDelegate()
+                propertyInfo.getHasDelegate(),
+                modifierList != null && modifierList.hasModifier(CLASSDELEGATE_KEYWORD)
         );
 
         List<TypeParameterDescriptorImpl> typeParameterDescriptors;
@@ -1267,6 +1269,7 @@ public class DescriptorResolver {
                 false,
                 classDescriptor.isExpect(),
                 modifierList != null && PsiUtilsKt.hasActualModifier(modifierList),
+                false,
                 false,
                 false
         );

@@ -316,6 +316,7 @@ open class WrappedVariableDescriptor(
     override fun isConst() = owner.isConst
     override fun isVar() = owner.isVar
     override fun isLateInit() = owner.isLateinit
+    override fun isClassDelegate() = owner.isClassDelegate
 
     override fun getCompileTimeInitializer(): ConstantValue<*>? {
         TODO("")
@@ -360,6 +361,8 @@ open class WrappedVariableDescriptorWithAccessor() : VariableDescriptorWithAcces
     override fun getContainingDeclaration() = (owner.parent as IrFunction).descriptor
 
     override fun isLateInit(): Boolean = false
+
+    override fun isClassDelegate(): Boolean = false
 
     override val getter: VariableAccessorDescriptor?
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
@@ -833,6 +836,8 @@ open class WrappedPropertyDescriptor(
 
     override fun isExternal() = owner.isExternal
 
+    override fun isClassDelegate() = owner.isClassDelegate
+
     override fun <R : Any?, D : Any?> accept(visitor: DeclarationDescriptorVisitor<R, D>?, data: D) =
         visitor!!.visitPropertyDescriptor(this, data)
 
@@ -1027,6 +1032,8 @@ open class WrappedFieldDescriptor(
         owner.correspondingPropertySymbol?.owner?.descriptor?.extensionReceiverParameter
 
     override fun isExternal() = owner.isExternal
+
+    override fun isClassDelegate() = owner.correspondingPropertySymbol?.owner?.isClassDelegate ?: false
 
     override fun <R : Any?, D : Any?> accept(visitor: DeclarationDescriptorVisitor<R, D>?, data: D) =
         visitor!!.visitPropertyDescriptor(this, data)

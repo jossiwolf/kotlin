@@ -298,7 +298,8 @@ open class DeepCopyIrTreeWithSymbols(
             declaration.type.remapType(),
             declaration.isVar,
             declaration.isConst,
-            declaration.isLateinit
+            declaration.isLateinit,
+            declaration.isClassDelegate
         ).apply {
             transformAnnotations(declaration)
             initializer = declaration.initializer?.transform()

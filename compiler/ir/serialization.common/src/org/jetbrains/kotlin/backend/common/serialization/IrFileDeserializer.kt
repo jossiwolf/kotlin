@@ -1076,7 +1076,8 @@ abstract class IrFileDeserializer(
                 deserializeIrType(proto.type),
                 proto.isVar,
                 proto.isConst,
-                proto.isLateinit
+                proto.isLateinit,
+                proto.isClassDelegate
             ).apply {
                 if (proto.hasInitializer())
                     initializer = deserializeExpression(proto.initializer)

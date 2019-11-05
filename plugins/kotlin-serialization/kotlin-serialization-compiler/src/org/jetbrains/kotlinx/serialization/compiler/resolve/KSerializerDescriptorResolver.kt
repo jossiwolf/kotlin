@@ -226,7 +226,7 @@ object KSerializerDescriptorResolver {
 
         val propertyDescriptor = PropertyDescriptorImpl.create(
             companionDescriptor, Annotations.EMPTY, Modality.OPEN, Visibilities.PUBLIC, false, name,
-            CallableMemberDescriptor.Kind.SYNTHESIZED, companionDescriptor.source, false, false, false, false, false, false
+            CallableMemberDescriptor.Kind.SYNTHESIZED, companionDescriptor.source, false, false, false, false, false, false, false
         )
 
         val extensionReceiverParameter: ReceiverParameterDescriptor? = null // kludge to disambiguate call
