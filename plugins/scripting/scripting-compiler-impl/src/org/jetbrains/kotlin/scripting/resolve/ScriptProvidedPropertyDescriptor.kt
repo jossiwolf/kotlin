@@ -30,7 +30,7 @@ class ScriptProvidedPropertyDescriptor(
     CallableMemberDescriptor.Kind.SYNTHESIZED,
     SourceElement.NO_SOURCE,
     /* lateInit = */ false, /* isConst = */ false, /* isExpect = */ false, /* isActual = */ false, /* isExternal = */ false,
-    /* isDelegated = */ false
+    /* isDelegated = */ false, /* isClassDelegate = */ false
 ) {
     init {
         setType(typeDescriptor.defaultType, emptyList(), receiver, null)

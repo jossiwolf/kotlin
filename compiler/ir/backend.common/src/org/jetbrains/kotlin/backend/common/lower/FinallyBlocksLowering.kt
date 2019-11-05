@@ -213,7 +213,7 @@ class FinallyBlocksLowering(val context: CommonBackendContext, private val throw
             val parameter = WrappedVariableDescriptor()
             val catchParameter = IrVariableImpl(
                 startOffset, endOffset, IrDeclarationOrigin.CATCH_PARAMETER, IrVariableSymbolImpl(parameter),
-                Name.identifier("t"), throwableType, isVar = false, isConst = false, isLateinit = false
+                Name.identifier("t"), throwableType, isVar = false, isConst = false, isLateinit = false, isClassDelegate = false
             ).also { parameter.bind(it) }
 
             catchParameter.parent = scope.getLocalDeclarationParent()

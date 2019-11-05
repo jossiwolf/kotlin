@@ -64,6 +64,7 @@ class JsSharedVariablesManager(val builtIns: IrBuiltIns, val implicitDeclaration
             irCall.type,
             false,
             false,
+            false,
             false
         ).also {
             descriptor.bind(it)

@@ -75,7 +75,8 @@ fun Scope.createTmpVariable(
         varType,
         isMutable,
         isConst = false,
-        isLateinit = false
+        isLateinit = false,
+        isClassDelegate = false
     ).apply {
         initializer = irExpression
         parent = getLocalDeclarationParent()

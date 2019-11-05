@@ -18,10 +18,7 @@ package org.jetbrains.kotlin.codegen
 
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.load.java.descriptors.JavaCallableMemberDescriptor
-import org.jetbrains.kotlin.resolve.calls.model.DefaultValueArgument
-import org.jetbrains.kotlin.resolve.calls.model.ExpressionValueArgument
-import org.jetbrains.kotlin.resolve.calls.model.ResolvedValueArgument
-import org.jetbrains.kotlin.resolve.calls.model.VarargValueArgument
+import org.jetbrains.kotlin.resolve.calls.model.*
 import org.jetbrains.kotlin.utils.DFS
 import org.jetbrains.kotlin.utils.mapToIndex
 
@@ -35,10 +32,10 @@ abstract class ArgumentGenerator {
      * @see kotlin.reflect.jvm.internal.KCallableImpl.callBy
      */
     open fun generate(
-            valueArgumentsByIndex: List<ResolvedValueArgument>,
-            actualArgs: List<ResolvedValueArgument>,
-            // may be null for a constructor of an object literal
-            calleeDescriptor: CallableDescriptor?
+        valueArgumentsByIndex: List<ResolvedValueArgument>,
+        actualArgs: List<ResolvedValueArgument>,
+        // may be null for a constructor of an object literal
+        calleeDescriptor: CallableDescriptor?
     ): DefaultCallArgs {
         assert(valueArgumentsByIndex.size == actualArgs.size) {
             "Value arguments collection should have same size, but ${valueArgumentsByIndex.size} != ${actualArgs.size}"
@@ -70,8 +67,7 @@ abstract class ArgumentGenerator {
                 is DefaultValueArgument -> {
                     if (calleeDescriptor?.defaultValueFromJava(declIndex) == true) {
                         generateDefaultJava(declIndex, argument)
-                    }
-                    else {
+                    } else {
                         defaultArgs.mark(declIndex)
                         generateDefault(declIndex, argument)
                     }
@@ -79,6 +75,7 @@ abstract class ArgumentGenerator {
                 is VarargValueArgument -> {
                     generateVararg(declIndex, argument)
                 }
+                is DelegationValueArgument -> generateDelegate(declIndex, argument)
                 else -> {
                     generateOther(declIndex, argument)
                 }
@@ -88,6 +85,10 @@ abstract class ArgumentGenerator {
         reorderArgumentsIfNeeded(actualArgsWithDeclIndex)
 
         return defaultArgs
+    }
+
+    protected open fun generateDelegate(i: Int, argument: DelegationValueArgument) {
+        throw UnsupportedOperationException("Unsupported delegation value argument #$i: $argument")
     }
 
     protected open fun generateExpression(i: Int, argument: ExpressionValueArgument) {
@@ -116,11 +117,11 @@ abstract class ArgumentGenerator {
 }
 
 private fun CallableDescriptor.defaultValueFromJava(index: Int): Boolean = DFS.ifAny(
-        listOf(this),
-        { current -> current.original.overriddenDescriptors.map { it.original } },
-        { descriptor ->
-            descriptor.original.overriddenDescriptors.isEmpty() &&
-            descriptor is JavaCallableMemberDescriptor &&
-            descriptor.valueParameters[index].declaresDefaultValue()
-        }
+    listOf(this),
+    { current -> current.original.overriddenDescriptors.map { it.original } },
+    { descriptor ->
+        descriptor.original.overriddenDescriptors.isEmpty() &&
+                descriptor is JavaCallableMemberDescriptor &&
+                descriptor.valueParameters[index].declaresDefaultValue()
+    }
 )

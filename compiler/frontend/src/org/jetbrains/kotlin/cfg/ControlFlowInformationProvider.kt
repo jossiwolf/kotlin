@@ -414,7 +414,8 @@ class ControlFlowInformationProvider private constructor(
                 }
                 is VariableDescriptor ->
                     if (!variableDescriptor.isLateInit &&
-                        !(variableDescriptor is MemberDescriptor && variableDescriptor.isEffectivelyExternal())
+                        !(variableDescriptor is MemberDescriptor && variableDescriptor.isEffectivelyExternal()) &&
+                                !variableDescriptor.isClassDelegate
                     ) {
                         report(Errors.UNINITIALIZED_VARIABLE.on(element, variableDescriptor), ctxt)
                     }

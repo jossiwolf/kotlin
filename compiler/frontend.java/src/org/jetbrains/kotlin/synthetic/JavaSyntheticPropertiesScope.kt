@@ -290,7 +290,7 @@ class JavaSyntheticPropertiesScope(storageManager: StorageManager, private val l
     ) : SyntheticJavaPropertyDescriptor, PropertyDescriptorImpl(
         containingDeclaration, original, annotations, modality, visibility, isVar, name, kind, source,
         /* lateInit = */ false, /* isConst = */ false, /* isExpect = */ false, /* isActual = */ false, /* isExternal = */ false,
-        /* isDelegated = */ false
+        /* isDelegated = */ false, /* isClassDelegate */ false
     ) {
 
         override var getMethod: FunctionDescriptor by Delegates.notNull()

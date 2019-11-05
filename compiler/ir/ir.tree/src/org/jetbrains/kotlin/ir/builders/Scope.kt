@@ -119,7 +119,8 @@ class Scope(val scopeOwnerSymbol: IrSymbol) {
             irExpression.type,
             isVar = isMutable,
             isConst = false,
-            isLateinit = false
+            isLateinit = false,
+            isClassDelegate = false
         ).also {
             it.initializer = irExpression
         }

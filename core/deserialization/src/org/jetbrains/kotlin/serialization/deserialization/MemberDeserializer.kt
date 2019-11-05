@@ -43,6 +43,7 @@ class MemberDeserializer(private val c: DeserializationContext) {
             Flags.IS_EXTERNAL_PROPERTY.get(flags),
             Flags.IS_DELEGATED.get(flags),
             Flags.IS_EXPECT_PROPERTY.get(flags),
+            Flags.IS_CLASSDELEGATE.get(flags),
             proto,
             c.nameResolver,
             c.typeTable,

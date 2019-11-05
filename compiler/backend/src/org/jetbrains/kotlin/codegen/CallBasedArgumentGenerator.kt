@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.ValueParameterDescriptor
 import org.jetbrains.kotlin.resolve.calls.model.DefaultValueArgument
+import org.jetbrains.kotlin.resolve.calls.model.DelegationValueArgument
 import org.jetbrains.kotlin.resolve.calls.model.ExpressionValueArgument
 import org.jetbrains.kotlin.resolve.calls.model.VarargValueArgument
 import org.jetbrains.kotlin.resolve.jvm.AsmTypes.OBJECT_TYPE
@@ -36,6 +37,10 @@ class CallBasedArgumentGenerator(
                 "Value parameters and their types mismatch in sizes: ${valueParameters.size} != ${valueParameterTypes.size}"
             }
         }
+    }
+
+    override fun generateDelegate(i: Int, argument: DelegationValueArgument) {
+        codegen.v
     }
 
     override fun generateExpression(i: Int, argument: ExpressionValueArgument) {

@@ -217,5 +217,6 @@ internal class DebugLabelPropertyDescriptor(
     /*isExpect = */false,
     /*isActual = */false,
     /*isExternal = */false,
-    /*isDelegated = */false
+    /*isDelegated = */false,
+    /*isClassDelegate = */false
 )

@@ -34,6 +34,7 @@ interface IrProperty :
     val isLateinit: Boolean
     val isDelegated: Boolean
     val isExternal: Boolean
+    val isClassDelegate: Boolean
     val isExpect: Boolean
     val isFakeOverride: Boolean
 

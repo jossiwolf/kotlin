@@ -189,7 +189,8 @@ class JvmSharedVariablesManager(
             refType,
             originalDeclaration.isVar,
             originalDeclaration.isConst,
-            isLateinit = false
+            isLateinit = false,
+            isClassDelegate = false
         ).apply {
             (descriptor as WrappedVariableDescriptor).bind(this)
             initializer = refConstructorCall

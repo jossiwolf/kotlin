@@ -177,7 +177,8 @@ class LocalVariableResolver(
                 /* isExpect = */ false,
                 /* isActual = */ false,
                 /* isExternal = */ false,
-                variable is KtProperty && variable.hasDelegate()
+                variable is KtProperty && variable.hasDelegate(),
+                /* isClassDelegate */ false
             )
             // For a local variable the type must not be deferred
             type = variableTypeAndInitializerResolver.resolveType(

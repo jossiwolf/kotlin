@@ -28,7 +28,7 @@ class ReplResultPropertyDescriptor(
     CallableMemberDescriptor.Kind.SYNTHESIZED,
     source,
     /* lateInit = */ false, /* isConst = */ false, /* isExpect = */ false, /* isActual = */ false, /* isExternal = */ false,
-    /* isDelegated = */ false
+    /* isDelegated = */ false, /* isClassDelegate = */ false
 ) {
     init {
         setType(kotlinType, emptyList(), receiver, null)

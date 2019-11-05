@@ -648,7 +648,7 @@ class DoubleColonExpressionResolver(
     ) {
         val localVariable = LocalVariableDescriptor(
             context.scope.ownerDescriptor, Annotations.EMPTY, Name.special("<anonymous>"), referenceType,
-            mutable, false, expression.toSourceElement()
+            mutable, false, false, expression.toSourceElement()
         )
 
         context.trace.record(BindingContext.VARIABLE, expression, localVariable)

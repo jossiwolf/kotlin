@@ -600,13 +600,13 @@ class Fir2IrDeclarationStorage(
     private fun declareIrVariable(
         startOffset: Int, endOffset: Int,
         origin: IrDeclarationOrigin, name: Name, type: IrType,
-        isVar: Boolean, isConst: Boolean, isLateinit: Boolean
+        isVar: Boolean, isConst: Boolean, isLateinit: Boolean, isClassDelegate: Boolean
     ): IrVariable {
         val descriptor = WrappedVariableDescriptor()
         return irSymbolTable.declareVariable(startOffset, endOffset, origin, descriptor, type) { symbol ->
             IrVariableImpl(
                 startOffset, endOffset, origin, symbol, name, type,
-                isVar, isConst, isLateinit
+                isVar, isConst, isLateinit, isClassDelegate
             ).apply {
                 descriptor.bind(this)
             }
@@ -621,7 +621,7 @@ class Fir2IrDeclarationStorage(
         val irVariable = variable.convertWithOffsets { startOffset, endOffset ->
             declareIrVariable(
                 startOffset, endOffset, origin,
-                variable.name, type, variable.isVar, isConst = false, isLateinit = false
+                variable.name, type, variable.isVar, isConst = false, isLateinit = false, isClassDelegate = false
             )
         }
         localStorage.putVariable(variable, irVariable)
@@ -632,7 +632,7 @@ class Fir2IrDeclarationStorage(
         return declareIrVariable(
             base.startOffset, base.endOffset, IrDeclarationOrigin.IR_TEMPORARY_VARIABLE,
             Name.identifier(getNameForTemporary(nameHint)), base.type,
-            isVar = false, isConst = false, isLateinit = false
+            isVar = false, isConst = false, isLateinit = false, isClassDelegate = false
         ).apply {
             initializer = base
         }

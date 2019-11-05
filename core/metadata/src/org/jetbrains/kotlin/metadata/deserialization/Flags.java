@@ -60,6 +60,7 @@ public class Flags {
     public static final BooleanFlagField IS_EXTERNAL_PROPERTY = FlagField.booleanAfter(HAS_CONSTANT);
     public static final BooleanFlagField IS_DELEGATED = FlagField.booleanAfter(IS_EXTERNAL_PROPERTY);
     public static final BooleanFlagField IS_EXPECT_PROPERTY = FlagField.booleanAfter(IS_DELEGATED);
+    public static final BooleanFlagField IS_CLASSDELEGATE = FlagField.booleanAfter(IS_EXPECT_PROPERTY);
 
     // Parameters
 
@@ -160,7 +161,8 @@ public class Flags {
             boolean lateInit,
             boolean isExternal,
             boolean isDelegated,
-            boolean isExpect
+            boolean isExpect,
+            boolean isClassDelegate
     ) {
         return HAS_ANNOTATIONS.toFlags(hasAnnotations)
                | VISIBILITY.toFlags(visibility)
@@ -175,6 +177,7 @@ public class Flags {
                | IS_EXTERNAL_PROPERTY.toFlags(isExternal)
                | IS_DELEGATED.toFlags(isDelegated)
                | IS_EXPECT_PROPERTY.toFlags(isExpect)
+               | IS_CLASSDELEGATE.toFlags(isClassDelegate)
                 ;
     }
 
